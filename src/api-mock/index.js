@@ -9,7 +9,8 @@ const methodMap = {
   GET: 'onGet',
   PUT: 'onPut',
   POST: 'onPost',
-  DELETE: 'onDelete'
+  DELETE: 'onAny',
+  PATCH: 'onAny'
 }
 
 const mock = new MockAdapter(axios)
@@ -21,3 +22,7 @@ const applyMock = (routes) => {
 }
 
 applyMock(routes)
+
+console.log(mock)
+
+console.log('mock created')
