@@ -23,6 +23,4 @@ const applyMock = (routes) => {
 
 applyMock(routes)
 
-console.log(mock)
-
 console.log('mock created')

@@ -4,12 +4,16 @@ import './index.css'
 import App from './App'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import reportWebVitals from './reportWebVitals'
+import { Provider } from 'react-redux'
+import store from './redux'
 
 if (process.env.NODE_ENV !== 'production') require('./api-mock')
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )

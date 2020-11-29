@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { getDataViaApi, postDataViaApi, putDataViaApi, deleteDataViaApi } from './utils/httpApi'
+import { connect } from 'react-redux'
+import { getDummy } from './redux/actions/api'
+import PropTypes from 'prop-types'
 
 class App extends Component {
   componentDidMount () {
-    getDataViaApi('/backend/dummy/get', res => console.log(res), res => console.log(res))
-    postDataViaApi('/backend/dummy/post', res => console.log(res), res => console.log(res))
-    putDataViaApi('/backend/dummy/put', res => console.log(res), res => console.log(res))
-    deleteDataViaApi('/backend/dummy/delete', res => console.log(res), res => console.log(res))
+    this.props.getDummy()
   }
 
   render () {
@@ -19,6 +18,7 @@ class App extends Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
+          <p>text: {this.props.dummy}</p>
           <a
             className="App-link"
             href="https://reactjs.org"
@@ -33,4 +33,19 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = state => {
+  return {
+    dummy: state.apiReducer.dummy
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    getDummy: () => dispatch(getDummy())
+  }
+}
+App.propTypes = {
+  getDummy: PropTypes.func,
+  dummy: PropTypes.string
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
